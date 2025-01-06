@@ -22,6 +22,17 @@ app.get("/", (req, res) => {
   res.send("on / path");
 });
 
+//dynamic routing
+app.get("/:userName", (req, res) => {
+  console.log(req.params.userName);
+  res.send(`hi ${req.params.userName}`);
+});
+
+app.get("/:userName/:age", (req, res) => {
+  console.log(req.params.userName);
+  res.send(`hi ${req.params.userName} of age ${req.params.age}`);
+});
+
 app.listen(3000, () => {
   console.log("server is running!");
 });
