@@ -9,7 +9,7 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   console.log("middleware chala again!");
-  console.log("req = ", req); //this req is an object and have many useful properties
+  // console.log("req = ", req); //this req is an object and have many useful properties
   next();
 });
 
@@ -38,7 +38,27 @@ app.get("/fivePath", (req, res) => {
   res.send(code); //in response, we can send anything like object, array e.t.c
 });
 
-//error handling
+//path parameters
+app.get("/search", (req, res) => {
+  let { q } = req.query;
+  if (!q) {
+    res.send(`please enter a query to search`);
+  }
+  console.log(q);
+  res.send(`you searched for query: ${q}`);
+});
+
+//for all paths that are not specified
+app.get("*", (req, res) => {
+  res.send("hello!please enter a valid path...");
+});
+
+//post request
+app.post("/", (req, res) => {
+  res.send("you sent a post request on root");
+});
+
+//error handling (if no response)
 app.get("/profile", (req, res, next) => {
   return next(new Error("something went wrong!")); //this will show at console
 });
