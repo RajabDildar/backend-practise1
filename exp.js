@@ -9,6 +9,7 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   console.log("middleware chala again!");
+  console.log("req = ", req); //this req is an object and have many useful properties
   next();
 });
 
@@ -18,7 +19,23 @@ app.get("/", (req, res) => {
 });
 
 app.get("/secPath", (req, res) => {
-  res.send("hello! you are on second path");
+  res.send("hello! you are on second path"); //in response, we can send anything like object, array e.t.c
+});
+
+app.get("/thirdPath", (req, res) => {
+  res.send({
+    fruit: "apple",
+    color: "red",
+  }); //in response, we can send anything like object, array e.t.c
+});
+
+app.get("/fourPath", (req, res) => {
+  res.send([1, 2, 3, 4, 5]); //in response, we can send anything like object, array e.t.c
+});
+
+app.get("/fivePath", (req, res) => {
+  let code = "<h1>heading</h1><p>paragraph</p>";
+  res.send(code); //in response, we can send anything like object, array e.t.c
 });
 
 //error handling
