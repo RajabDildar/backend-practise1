@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("includes/head") %>
+  <body>
+    <h1><%=`your username is : ${userName.toUpperCase()}` %></h1>
+    <h2>people that follow you :</h2>
+    <ul>
+      <% for(let name of followers){ %>
+      <li><%=name%></li>
+      <%}%>
+    </ul>
+  </body>
+</html>

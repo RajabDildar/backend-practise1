@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, "public"))); //this line says that f
 // install ejs package from npm
 //set ejs as a view engine
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views")); //telling that views folder should be in same directory
 
 app.get("/profile", (req, res) => {
   res.render("index"); //the ejs file in views is given to show on page
@@ -20,6 +21,11 @@ app.get("/profile", (req, res) => {
 
 app.get("/", (req, res) => {
   res.send("on / path");
+});
+
+app.get("/diceRoll", (req, res) => {
+  let diceVal = Math.floor(Math.random() * 6 + 1);
+  res.render("diceRoll", { diceVal });
 });
 
 //dynamic routing
