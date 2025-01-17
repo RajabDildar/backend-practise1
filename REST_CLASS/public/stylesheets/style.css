@@ -1,0 +1,51 @@
+body {
+  display: grid;
+  place-items: center;
+}
+
+h1 {
+  color: maroon;
+}
+
+.post {
+  background-color: pink;
+  min-width: 30vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.post input {
+  padding: 5px;
+}
+
+.btns {
+  display: flex;
+  gap: 1rem;
+}
+
+.username {
+  font-style: italic;
+}
+
+div,
+.post {
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+}
+
+a,
+button {
+  font-size: 1.2rem;
+  background-color: hsl(240, 100%, 50%, 100%);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: hsl(240, 100%, 50%, 80%);
+  }
+}
