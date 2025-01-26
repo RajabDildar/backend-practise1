@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remove account</title>
+  </head>
+  <body>
+    <h2>Your id = <%= id %></h2>
+    <h4>Do you want to remove your account?</h4>
+    <form action="/user/<%= id %>?_method=DELETE" method="post">
+      <button>Delete Account</button>
+    </form>
+  </body>
+</html>
