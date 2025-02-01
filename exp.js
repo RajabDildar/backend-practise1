@@ -4,13 +4,13 @@ const app = express();
 //middleware for all routes
 app.use((req, res, next) => {
   console.log("middleware chala");
-  next(); //next function call krne se middleware ka kam khatam hone k bad request routes pr jae gi
+  return next(); //next function call krne se middleware ka kam khatam hone k bad request routes pr jae gi
 });
 
 app.use((req, res, next) => {
   console.log("middleware chala again!");
   // console.log("req = ", req); //this req is an object and have many useful properties
-  next();
+  next(); //we can write code after calling next function. but it is not a good practise. that's why, we return this function.
 });
 
 //routes
