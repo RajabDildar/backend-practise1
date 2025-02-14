@@ -23,6 +23,19 @@ const customerSchema = new mongoose.Schema({
   ],
 });
 
+//defining mongoose middlewares on schemas (written before creating models)
+customerSchema.pre("findOneAndDelete", async () => {
+  console.log("PRE MIDDLEWARE");
+}); //this will be triggered before deleteting some customer
+
+customerSchema.post("findOneAndDelete", async (customer) => {
+  if (customer.orders.length) {
+    let resutlt = await Order.deleteMany({ _id: { $in: customer.orders } });
+    console.log(resutlt);
+  }
+  console.log("POST MIDDLEWARE");
+}); //this will be triggered after deleteting some customer
+
 const Order = mongoose.model(`Order`, orderSchema);
 const Customer = mongoose.model(`Customer`, customerSchema);
 
@@ -69,3 +82,28 @@ const findCustomers2 = async () => {
 };
 
 // findCustomers2();
+
+const addCust = async () => {
+  let newCust = new Customer({
+    name: "Rahul Kumar",
+  });
+
+  let newOrder = new Order({
+    item: "chocolate",
+    price: 20,
+  });
+
+  newCust.orders.push(newOrder);
+
+  await newOrder.save();
+  await newCust.save();
+};
+// addCust();
+
+const delCust = async () => {
+  let result = await Customer.findByIdAndDelete("67ac89b023a203573d0d42fb"); //findByIdAndDelete triggers => findOneAndDelete => triggers mongoose middlewares
+  // console.log(result);
+  console.log("deleting...");
+};
+
+// delCust();
