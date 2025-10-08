@@ -24,14 +24,15 @@ const customerSchema = new mongoose.Schema({
 });
 
 //defining mongoose middlewares on schemas (written before creating models)
-customerSchema.pre("findOneAndDelete", async () => {
+customerSchema.pre("findOneAndDelete", async (next) => {
   console.log("PRE MIDDLEWARE");
+  next();
 }); //this will be triggered before deleteting some customer
 
 customerSchema.post("findOneAndDelete", async (customer) => {
   if (customer.orders.length) {
-    let resutlt = await Order.deleteMany({ _id: { $in: customer.orders } });
-    console.log(resutlt);
+    let result = await Order.deleteMany({ _id: { $in: customer.orders } });
+    console.log("Deleted associated orders:", result);
   }
   console.log("POST MIDDLEWARE");
 }); //this will be triggered after deleteting some customer
